@@ -10,7 +10,13 @@ function Header() {
         <div className="wave" id="wave3"></div>
         <div className="wave" id="wave4"></div>
       </div>
-      <ul className="social_icon">
+      <div class="container text-center">
+  <div class="row">
+    <div class="col footercontext text-white">
+     Grow Slowly Like a Tree
+    </div>
+    <div class="col">
+    <ul className="social_icon">
         <li>
           <a href="#"><ion-icon name="logo-facebook"></ion-icon></a>
         </li>
@@ -24,13 +30,15 @@ function Header() {
           <a href="#"><ion-icon name="logo-instagram"></ion-icon></a>
         </li>
       </ul>
-      {/* <ul className="menu">
-        <li><a><Link to="/">Home</Link></a></li>
-      </ul> */}
-
-      {/* <div>
+    </div>
+    <div class="col footercontext text-white">
+    <div>
         &copy; All rights reserved
-      </div> */}
+      </div>
+    </div>
+  </div>
+</div>
+
     </footer>
   );
 }

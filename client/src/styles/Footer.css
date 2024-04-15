@@ -27,6 +27,7 @@ footer .menu
 	justify-content: center;
 	align-items: center;
 	margin: 5px 0;
+	margin-right: 30px;
 	flex-wrap: wrap;
 }
 footer .social_icon li,
@@ -62,6 +63,18 @@ footer .menu li a:hover
 {
 	opacity: 1;
 }
+.footercontext {
+	margin-top: 7px;
+	transition: opacity 0.5s ease;
+  }
+  
+  .footercontext:hover {
+	opacity: 0.5;
+  }
+.footercontext:hover {
+	opacity: 0.5;
+  }
+
 footer .wave
 {
 	position: absolute;

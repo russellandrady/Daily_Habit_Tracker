@@ -71,7 +71,7 @@ export default function Register() {
                 onChange={handleChange}
               />
             </div>
-            <div class="col-md-auto d-flex justify-content-center">
+            <div className="col-md-auto d-flex justify-content-center">
               <button
                 type="submit"
                 className="btn bg-success text-white mt-3"
@@ -100,7 +100,7 @@ export default function Register() {
             some of those fields.
             <button
               type="button"
-              class="btn-close"
+              className="btn-close"
               data-bs-dismiss="alert"
               aria-label="Close"
               onClick={() => setError(false)}

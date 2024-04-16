@@ -10,12 +10,12 @@ function Header() {
         <div className="wave" id="wave3"></div>
         <div className="wave" id="wave4"></div>
       </div>
-      <div class="container text-center">
-        <div class="row">
-          <div class="col footercontext text-white">
+      <div className="container text-center">
+        <div className="row">
+          <div className="col footercontext text-white">
             Grow Slowly Like a Tree
           </div>
-          <div class="col">
+          <div className="col">
             <ul className="social_icon">
               <li>
                 <a href="#">
@@ -39,7 +39,7 @@ function Header() {
               </li>
             </ul>
           </div>
-          <div class="col footercontext text-white">
+          <div className="col footercontext text-white">
             <div>&copy; All rights reserved</div>
           </div>
         </div>

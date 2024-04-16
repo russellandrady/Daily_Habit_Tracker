@@ -11,29 +11,19 @@ function Header() {
       <div className="group">
         <ul className="navigation">
           <li>
-            <a>
-              <Link to="/">Home</Link>
-            </a>
+            <Link to="/">Home</Link>
           </li>
           <li>
-            <a>
-              <Link to="/about">About</Link>
-            </a>
+            <Link to="/about">About</Link>
           </li>
           <li>
-            <a>
-              <Link to="/register">Register</Link>
-            </a>
+            <Link to="/register">Register</Link>
           </li>
           <li>
-            <a>
-              <Link to="/login">Login</Link>
-            </a>
+            <Link to="/login">Login</Link>
           </li>
           <li>
-            <a>
-              <Link to="/profile">Profile</Link>
-            </a>
+            <Link to="/profile">Profile</Link>
           </li>
         </ul>
         <ion-icon

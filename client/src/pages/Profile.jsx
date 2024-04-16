@@ -1,13 +1,50 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import "../styles/Profile.css";
+import { useDispatch } from "react-redux";
+import {
+  updateAlert,
+  updateUserStart,
+  updateUserFailure,
+  updateUserSuccess,
+  deleteUserFailure,
+  deleteUserStart,
+  deleteUserSuccess,
+  signOut,
+} from "../../redux/user/userSlice";
 export default function Profile() {
-  const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
+  // const [error, setError] = useState(false);
+  // const [loading, setLoading] = useState(false);
+  const { currentUser, loading, error } = useSelector((state) => state.user);
   const [formdata, setFormdata] = useState({});
-  const { currentUser } = useSelector((state) => state.user);
+  const [updateSuccess, setUpdateSuccess] = useState(false);
+  const dispatch = useDispatch();
   const handleChange = (e) => {
     setFormdata({ ...formdata, [e.target.id]: e.target.value });
+  };
+  const handleSubmit = async (e) => {
+    setUpdateSuccess(false);
+    e.preventDefault();
+    try {
+      dispatch(updateUserStart());
+      const res = await fetch(`/api/user/update/${currentUser._id}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formdata),
+      });
+      const data = await res.json();
+      if (data.success == false) {
+        dispatch(updateUserFailure(data.message));
+        return;
+      }
+      dispatch(updateUserSuccess(data));
+      setUpdateSuccess(true);
+    } catch (error) {
+      dispatch(updateUserFailure(error));
+      console.log(error);
+    }
   };
   return (
     <div className="container mt-5 mx-auto" style={{ maxWidth: "500px" }}>
@@ -22,7 +59,7 @@ export default function Profile() {
         <div className="card-header text-center">Profile</div>
 
         <div className="card-body">
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="form-group">
               <label for="username">Username</label>
               <input
@@ -69,20 +106,30 @@ export default function Profile() {
             </div>
           </form>
           <div
-            className={`alert alert-warning alert-dismissible fade ${
-              error ? "show" : ""
-            } mt-3`}
+            className={`alert alert-dismissible fade slideInFromLeft 0.2s ease-out ${
+              error ? "alert-warning" : updateSuccess ? "alert-success" : ""
+            } ${error || updateSuccess ? "show" : ""} mt-3`}
             role="alert"
           >
-            <strong>Try something different!</strong> You should check in on
-            some of those fields.
+            <strong>
+              {error ? "Try something different!" : "Successfully updated!"}
+            </strong>
+            {error
+              ? " You should check in on some of those fields."
+              : " You can now continue on your habits."}
             <button
               type="button"
               className="btn-close"
               data-bs-dismiss="alert"
               aria-label="Close"
-              onClick={() => setError(false)}
-              hidden={!error}
+              onClick={() => {
+                if (error) {
+                  dispatch(updateAlert());
+                } else {
+                  setUpdateSuccess(false);
+                }
+              }}
+              hidden={!error && !updateSuccess}
             ></button>
           </div>
         </div>

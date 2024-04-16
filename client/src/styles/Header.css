@@ -170,7 +170,7 @@ header .search
 	header.open .navigation
 	{
 		top: 70px;
-		opacity: 1;
+		opacity: 0.9;
 		visibility: visible;
 		left: 0;
 		display: flex;

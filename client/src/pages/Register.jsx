@@ -1,14 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function Register() {
+  const [formdata, setFormdata] = useState({});
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const handleChange = (e) => {
+    setFormdata({ ...formdata, [e.target.id]: e.target.value });
+  };
+  const handleSubmit = async (e) => {
+    try {
+      setLoading(true);
+      setError(false);
+      e.preventDefault();
+      const response = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formdata),
+      });
+      const data = await response.json();
+      setLoading(false);
+      if (data.success === false) {
+        setError(true);
+        return;
+      }
+    } catch (error) {
+      setLoading(false);
+      setError(true);
+    }
+  };
   return (
     <div className="container mt-5 mx-auto" style={{ maxWidth: "500px" }}>
-      <div className="card shadow" style={{zIndex: '1' }}>
+      <div className="card shadow" style={{ zIndex: "1" }}>
         <div className="card-header text-center">Register</div>
 
         <div className="card-body">
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="form-group">
               <label for="username">Username</label>
               <input
@@ -17,6 +46,7 @@ export default function Register() {
                 id="username"
                 placeholder="Username"
                 name="username"
+                onChange={handleChange}
               />
             </div>
             <div className="form-group">
@@ -27,6 +57,7 @@ export default function Register() {
                 id="email"
                 placeholder="Email"
                 name="email"
+                onChange={handleChange}
               />
             </div>
             <div className="form-group">
@@ -37,14 +68,42 @@ export default function Register() {
                 id="password"
                 placeholder="Password"
                 name="password"
+                onChange={handleChange}
               />
             </div>
             <div class="col-md-auto d-flex justify-content-center">
-              <button type="submit" className="btn bg-success text-white mt-3">Register</button>
+              <button
+                type="submit"
+                className="btn bg-success text-white mt-3"
+                disabled={loading}
+              >
+                {loading ? "Loading.." : "Register"}
+              </button>
             </div>
           </form>
           <div className="text-center mt-3">
-            <Link to={'/login'}><h6><span style={{fontSize:"0.8rem"}}>Already have an account</span></h6></Link>
+            <Link to={"/login"}>
+              <h6>
+                <span style={{ fontSize: "0.8rem" }}>
+                  Already have an account
+                </span>
+              </h6>
+            </Link>
+          </div>
+          <div
+            className={`alert alert-warning alert-dismissible fade ${error ? 'show' : ''} mt-3`}
+            role="alert"
+          >
+            <strong>Try something different!</strong> You should check in on some of
+            those fields.
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="alert"
+              aria-label="Close"
+              onClick={() => setError(false)}
+              hidden={!error}
+            ></button>
           </div>
         </div>
       </div>

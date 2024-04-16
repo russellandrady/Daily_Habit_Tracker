@@ -91,11 +91,13 @@ export default function Register() {
             </Link>
           </div>
           <div
-            className={`alert alert-warning alert-dismissible fade ${error ? 'show' : ''} mt-3`}
+            className={`alert alert-warning alert-dismissible fade ${
+              error ? "show" : ""
+            } mt-3`}
             role="alert"
           >
-            <strong>Try something different!</strong> You should check in on some of
-            those fields.
+            <strong>Try something different!</strong> You should check in on
+            some of those fields.
             <button
               type="button"
               class="btn-close"
@@ -105,6 +107,7 @@ export default function Register() {
               hidden={!error}
             ></button>
           </div>
+          
         </div>
       </div>
     </div>

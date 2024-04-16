@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import "../styles/Profile.css";
 
 export default function Register() {
   const [formdata, setFormdata] = useState({});
@@ -33,7 +34,7 @@ export default function Register() {
   };
   return (
     <div className="container mt-5 mx-auto" style={{ maxWidth: "500px" }}>
-      <div className="card shadow" style={{ zIndex: "1" }}>
+      <div className="card shadow" style={{ zIndex: "1", margin: "auto", animation: "slideInFromLeft 0.2s ease-out"}}>
         <div className="card-header text-center">Register</div>
 
         <div className="card-body">
@@ -47,6 +48,7 @@ export default function Register() {
                 placeholder="Username"
                 name="username"
                 onChange={handleChange}
+                required
               />
             </div>
             <div className="form-group">
@@ -58,6 +60,7 @@ export default function Register() {
                 placeholder="Email"
                 name="email"
                 onChange={handleChange}
+                required
               />
             </div>
             <div className="form-group">
@@ -69,6 +72,7 @@ export default function Register() {
                 placeholder="Password"
                 name="password"
                 onChange={handleChange}
+                required
               />
             </div>
             <div className="col-md-auto d-flex justify-content-center">

@@ -8,6 +8,7 @@ import {
 } from "../../redux/user/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import "../styles/Profile.css";
 
 export default function Login() {
   const [formdata, setFormdata] = useState({});
@@ -46,8 +47,8 @@ export default function Login() {
   };
   return (
     <div className="container mt-5 mx-auto" style={{ maxWidth: "500px" }}>
-      <div className="card shadow" style={{ zIndex: "1" }}>
-        <div className="card-header text-center">Register</div>
+      <div className="card shadow" style={{ zIndex: "1", margin: "auto", animation: "slideInFromLeft 0.2s ease-out"}}>
+        <div className="card-header text-center">Login</div>
 
         <div className="card-body">
           <form onSubmit={handleSubmit}>
@@ -60,6 +61,7 @@ export default function Login() {
                 placeholder="Email"
                 name="email"
                 onChange={handleChange}
+                required
               />
             </div>
             <div className="form-group">
@@ -71,6 +73,7 @@ export default function Login() {
                 placeholder="Password"
                 name="password"
                 onChange={handleChange}
+                required
               />
             </div>
             <div className="col-md-auto d-flex justify-content-center">

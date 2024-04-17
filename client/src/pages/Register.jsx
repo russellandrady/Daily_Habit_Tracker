@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../styles/Profile.css";
 
 export default function Register() {
   const [formdata, setFormdata] = useState({});
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
   const handleChange = (e) => {
     setFormdata({ ...formdata, [e.target.id]: e.target.value });
   };
@@ -27,6 +28,7 @@ export default function Register() {
         setError(true);
         return;
       }
+      navigate("/login");
     } catch (error) {
       setLoading(false);
       setError(true);
@@ -34,13 +36,20 @@ export default function Register() {
   };
   return (
     <div className="container mt-5 mx-auto" style={{ maxWidth: "500px" }}>
-      <div className="card shadow" style={{ zIndex: "1", margin: "auto", animation: "slideInFromLeft 0.2s ease-out"}}>
+      <div
+        className="card shadow"
+        style={{
+          zIndex: "1",
+          margin: "auto",
+          animation: "slideInFromLeft 0.2s ease-out",
+        }}
+      >
         <div className="card-header text-center">Register</div>
 
         <div className="card-body">
           <form onSubmit={handleSubmit}>
             <div className="form-group">
-              <label for="username">Username</label>
+              <label htmlFor="username">Username</label>
               <input
                 type="text"
                 className="form-control text-center"
@@ -52,7 +61,7 @@ export default function Register() {
               />
             </div>
             <div className="form-group">
-              <label for="email">Email</label>
+              <label htmlFor="email">Email</label>
               <input
                 type="email"
                 className="form-control text-center"
@@ -64,7 +73,7 @@ export default function Register() {
               />
             </div>
             <div className="form-group">
-              <label for="password">Password</label>
+              <label htmlFor="password">Password</label>
               <input
                 type="password"
                 className="form-control text-center"
@@ -111,7 +120,6 @@ export default function Register() {
               hidden={!error}
             ></button>
           </div>
-          
         </div>
       </div>
     </div>

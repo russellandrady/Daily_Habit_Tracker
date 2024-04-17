@@ -2,9 +2,21 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/Header.css";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { signOut } from "../../redux/user/userSlice";
+
 function Header() {
   const [menuActive, setMenuActive] = useState(false);
   const { currentUser } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const handleSignOut = async()=>{//to use fetch this should be async
+    try {
+      await fetch('/api/auth/signout');
+      dispatch(signOut());
+    } catch (error) {
+      console.log(error);
+    }
+  }
   return (
     <header className={menuActive ? "open" : ""}>
       <Link to="/" className="logo">
@@ -27,7 +39,7 @@ function Header() {
             
           </li>
           {currentUser &&<li>
-             <Link to="/signout">Signout</Link>
+             <Link onClick={handleSignOut}>Signout</Link>
             
           </li>}
         </ul>

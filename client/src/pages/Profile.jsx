@@ -10,8 +10,10 @@ import {
   deleteUserFailure,
   deleteUserStart,
   deleteUserSuccess,
-  signOut,
 } from "../../redux/user/userSlice";
+import { Modal, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
+
 export default function Profile() {
   // const [error, setError] = useState(false);
   // const [loading, setLoading] = useState(false);
@@ -19,6 +21,27 @@ export default function Profile() {
   const [formdata, setFormdata] = useState({});
   const [updateSuccess, setUpdateSuccess] = useState(false);
   const dispatch = useDispatch();
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const handleCloseDeleteModal = () => setShowDeleteModal(false);
+  const handleCloseDeleteModalForDeleteBegin = () => setShowDeleteModal(true);
+
+  const handleDeleteUser = async () => {
+    // Delete user logic here
+    try {
+      dispatch(deleteUserStart());
+      const res = await fetch(`/api/user/delete/${currentUser._id}`, {
+        method: "DELETE",
+      });
+      const data = await res.json();
+      if (data.success == false) {
+        dispatch(deleteUserFailure(data.message));
+        return;
+      }
+      dispatch(deleteUserSuccess(data));
+    } catch (error) {
+      dispatch(deleteUserFailure(error));
+    }
+  };
   const handleChange = (e) => {
     setFormdata({ ...formdata, [e.target.id]: e.target.value });
   };
@@ -61,7 +84,7 @@ export default function Profile() {
         <div className="card-body">
           <form onSubmit={handleSubmit}>
             <div className="form-group">
-              <label for="username">Username</label>
+              <label htmlFor="username">Username</label>
               <input
                 type="text"
                 className="form-control text-center"
@@ -73,7 +96,7 @@ export default function Profile() {
               />
             </div>
             <div className="form-group">
-              <label for="email">Email</label>
+              <label htmlFor="email">Email</label>
               <input
                 type="email"
                 className="form-control text-center"
@@ -85,7 +108,7 @@ export default function Profile() {
               />
             </div>
             <div className="form-group">
-              <label for="password">Password</label>
+              <label htmlFor="password">Password</label>
               <input
                 type="password"
                 className="form-control text-center"
@@ -132,6 +155,32 @@ export default function Profile() {
               hidden={!error && !updateSuccess}
             ></button>
           </div>
+
+          <div className="text-center mt-3">
+            <Link onClick={handleCloseDeleteModalForDeleteBegin}>
+              <h6>
+                <span style={{ fontSize: "0.8rem" }}>
+                  wanna delete the account?
+                </span>
+              </h6>
+            </Link>
+          </div>
+          <Modal show={showDeleteModal} onHide={handleCloseDeleteModal}>
+            <Modal.Header closeButton>
+              <Modal.Title>Confirm Deletion</Modal.Title>
+            </Modal.Header>
+            <Modal.Body className="text-danger">
+              Really? You wanna delete your account? You cannot revise this.
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleCloseDeleteModal}>
+                Cancel
+              </Button>
+              <Button variant="danger" onClick={handleDeleteUser}>
+                Delete
+              </Button>
+            </Modal.Footer>
+          </Modal>
         </div>
       </div>
     </div>

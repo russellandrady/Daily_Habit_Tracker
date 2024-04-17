@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   signInStart,
   signInSuccess,
@@ -47,13 +47,20 @@ export default function Login() {
   };
   return (
     <div className="container mt-5 mx-auto" style={{ maxWidth: "500px" }}>
-      <div className="card shadow" style={{ zIndex: "1", margin: "auto", animation: "slideInFromLeft 0.2s ease-out"}}>
+      <div
+        className="card shadow"
+        style={{
+          zIndex: "1",
+          margin: "auto",
+          animation: "slideInFromLeft 0.2s ease-out",
+        }}
+      >
         <div className="card-header text-center">Login</div>
 
         <div className="card-body">
           <form onSubmit={handleSubmit}>
             <div className="form-group">
-              <label for="email">Email</label>
+              <label htmlFor="email">Email</label>
               <input
                 type="email"
                 className="form-control text-center"
@@ -65,7 +72,7 @@ export default function Login() {
               />
             </div>
             <div className="form-group">
-              <label for="password">Password</label>
+              <label htmlFor="password">Password</label>
               <input
                 type="password"
                 className="form-control text-center"
@@ -99,8 +106,8 @@ export default function Login() {
             } mt-3`}
             role="alert"
           >
-            <strong>{error.message||"Try something different!"}.</strong> You should check in on
-            some of those fields.
+            <strong>{error.message || "Try something different!"}.</strong> You
+            should check in on some of those fields.
             <button
               type="button"
               className="btn-close"

@@ -1,0 +1,18 @@
+@keyframes slideInFromLeft {
+	0% {
+		transform: translateX(-300px);
+		opacity: 0;
+	}
+	100% {
+		transform: translateX(0);
+		opacity: 1;
+	}
+}
+
+.tr-hover {
+	transition: opacity 0.2s ease-in-out;
+  }
+  
+  .tr-hover:hover {
+	opacity: 0.3;
+  }

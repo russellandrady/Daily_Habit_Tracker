@@ -3,6 +3,15 @@ import "../styles/Habit.css";
 import { Button, Modal } from "react-bootstrap";
 import { MdFormatListBulletedAdd } from "react-icons/md";
 import { set } from "mongoose";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+} from "recharts";
 export default function Habits() {
   const [habits, setHabits] = useState([]);
   const [formdata, setFormdata] = useState({});
@@ -23,6 +32,20 @@ export default function Habits() {
   const [formUpdatedData, setFormUpdatedData] = useState({});
   // console.log(selectedHabit);
   // console.log(formdata)
+  const [graphData, setGraphData] = useState({});
+  console.log(graphData);
+  const formatGraphData = (habit) => {
+    return [
+      { name: "Day 1", percentage: habit.day1 },
+      { name: "Day 2", percentage: habit.day2 },
+      { name: "Day 3", percentage: habit.day3 },
+      { name: "Day 4", percentage: habit.day4 },
+      { name: "Day 5", percentage: habit.day5 },
+      { name: "Day 6", percentage: habit.day6 },
+      { name: "Day 7", percentage: habit.day7 },
+    ];
+  };
+
   const handleChange = (e) => {
     setFormdata({ ...formdata, [e.target.id]: e.target.value });
   };
@@ -94,7 +117,7 @@ export default function Habits() {
       const res = await fetch(`/api/habit/delete/${selectedHabit._id}`, {
         method: "DELETE",
       });
-      
+
       const data = await res.json();
       if (data.success == false) {
         setError(true);
@@ -141,10 +164,15 @@ export default function Habits() {
     return result;
   }
   function rgbToHex(color) {
-    return '#' + color.map((x) => {
-      const hex = x.toString(16);
-      return hex.length === 1 ? '0' + hex : hex;
-    }).join('');
+    return (
+      "#" +
+      color
+        .map((x) => {
+          const hex = x.toString(16);
+          return hex.length === 1 ? "0" + hex : hex;
+        })
+        .join("")
+    );
   }
   function getColorForPercentage(pct) {
     const percent = Math.max(Math.min(100, pct), 0) / 100;
@@ -175,7 +203,7 @@ export default function Habits() {
         <div className="card-body">
           <table className="table table-striped">
             <thead>
-              <tr >
+              <tr>
                 <th scope="col">Habit Name</th>
                 <th scope="col">Description</th>
                 <th scope="col">Day 1</th>
@@ -200,18 +228,88 @@ export default function Habits() {
                   onClick={() => {
                     handleShowUpdateModal();
                     setSelectedHabit(habit);
-
+                    setGraphData(formatGraphData(habit));
                   }}
                 >
                   <td>{habit.habit}</td>
                   <td>{habit.description}</td>
-                  <td className="color-transition" style={{backgroundColor: habit.day1!== null ? getColorForPercentage(habit.day1) : 'transparent'}}>{habit.day1}</td>
-                  <td className="color-transition" style={{backgroundColor: habit.day2!== null ? getColorForPercentage(habit.day2) : 'transparent'}}>{habit.day2}</td>
-                  <td className="color-transition" style={{backgroundColor: habit.day3!== null ? getColorForPercentage(habit.day3) : 'transparent'}}>{habit.day3}</td>
-                  <td className="color-transition" style={{backgroundColor: habit.day4!== null ? getColorForPercentage(habit.day4) : 'transparent'}}>{habit.day4}</td>
-                  <td className="color-transition" style={{backgroundColor: habit.day5!== null ? getColorForPercentage(habit.day5) : 'transparent'}}>{habit.day5}</td>
-                  <td className="color-transition" style={{backgroundColor: habit.day6!== null ? getColorForPercentage(habit.day6) : 'transparent'}}>{habit.day6}</td>
-                  <td className="color-transition" style={{backgroundColor: habit.day7!== null ? getColorForPercentage(habit.day7) : 'transparent'}}>{habit.day7}</td>
+                  <td
+                    className="color-transition"
+                    style={{
+                      backgroundColor:
+                        habit.day1 !== null
+                          ? getColorForPercentage(habit.day1)
+                          : "transparent",
+                    }}
+                  >
+                    {habit.day1}
+                  </td>
+                  <td
+                    className="color-transition"
+                    style={{
+                      backgroundColor:
+                        habit.day2 !== null
+                          ? getColorForPercentage(habit.day2)
+                          : "transparent",
+                    }}
+                  >
+                    {habit.day2}
+                  </td>
+                  <td
+                    className="color-transition"
+                    style={{
+                      backgroundColor:
+                        habit.day3 !== null
+                          ? getColorForPercentage(habit.day3)
+                          : "transparent",
+                    }}
+                  >
+                    {habit.day3}
+                  </td>
+                  <td
+                    className="color-transition"
+                    style={{
+                      backgroundColor:
+                        habit.day4 !== null
+                          ? getColorForPercentage(habit.day4)
+                          : "transparent",
+                    }}
+                  >
+                    {habit.day4}
+                  </td>
+                  <td
+                    className="color-transition"
+                    style={{
+                      backgroundColor:
+                        habit.day5 !== null
+                          ? getColorForPercentage(habit.day5)
+                          : "transparent",
+                    }}
+                  >
+                    {habit.day5}
+                  </td>
+                  <td
+                    className="color-transition"
+                    style={{
+                      backgroundColor:
+                        habit.day6 !== null
+                          ? getColorForPercentage(habit.day6)
+                          : "transparent",
+                    }}
+                  >
+                    {habit.day6}
+                  </td>
+                  <td
+                    className="color-transition"
+                    style={{
+                      backgroundColor:
+                        habit.day7 !== null
+                          ? getColorForPercentage(habit.day7)
+                          : "transparent",
+                    }}
+                  >
+                    {habit.day7}
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -232,6 +330,7 @@ export default function Habits() {
             style={{
               fontSize: "3rem",
               color: "green",
+              marginBottom: "200px",
             }}
             onClick={handleShow}
           >
@@ -281,7 +380,7 @@ export default function Habits() {
         </Modal>
         <Modal show={showUpdateModal} onHide={handleCloseUpdateModal}>
           <Modal.Header closeButton>
-            <Modal.Title>Update Habit</Modal.Title>
+            <Modal.Title>Habit Progress</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <form onSubmit={handleUpdateSubmit}>
@@ -344,7 +443,6 @@ export default function Habits() {
                   defaultValue={selectedHabit.day3}
                   onChange={handleUpdateChange}
                 />
-                
               </div>
               <div className="form-group">
                 <label htmlFor="day4">Day 4</label>
@@ -412,6 +510,30 @@ export default function Habits() {
                 </button>
               </div>
             </form>
+            <div style={{ display: "flex", justifyContent: "center" }} className="bar_chart">
+              <BarChart
+                width={500}
+                height={300}
+                data={graphData}
+                margin={{ top: 10, right: 30 }}
+              >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="name" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Bar dataKey="percentage" fill="#8884d8" />
+              </BarChart>
+            </div>
+            {/* <div className="col-md-auto d-flex justify-content-center">
+                <button
+                  className="btn bg-danger text-white mt-3"
+                  disabled={loading}
+                  onClick={handleResetHabit}
+                >
+                  {loading ? "Loading.." : "Reset"}
+                </button>
+              </div> */}
           </Modal.Body>
         </Modal>
       </>

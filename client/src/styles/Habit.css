@@ -31,3 +31,13 @@
 	transform: translateY(-5px);
 
 }
+
+.bar_chart{
+	transition: 0.9s;
+}
+
+.bar_chart:hover
+{
+	transform: translateY(-5px);
+
+}

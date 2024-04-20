@@ -51,3 +51,12 @@ export const updateHabit = async (req, res, next) => {
       next(err);
     }
   };
+
+  export const deleteHabit = async (req, res, next) => {
+    try {
+      await Habit.findByIdAndDelete(req.params.id);
+      res.status(200).json("Habit has been deleted");
+    } catch (err) {
+      next(err);
+    }
+  };

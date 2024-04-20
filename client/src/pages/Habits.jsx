@@ -14,7 +14,10 @@ export default function Habits() {
   const handleShow = () => setShow(true);
 
   const [showUpdateModal, setShowUpdateModal] = useState(false);
-  const handleCloseUpdateModal = () => setShowUpdateModal(false);
+  const handleCloseUpdateModal = () => {
+    setShowUpdateModal(false);
+    setSelectedHabit({});
+  };
   const handleShowUpdateModal = () => setShowUpdateModal(true);
   const [selectedHabit, setSelectedHabit] = useState({});
   const [formUpdatedData, setFormUpdatedData] = useState({});
@@ -78,6 +81,35 @@ export default function Habits() {
       setFormUpdatedData({});
       setSelectedHabit({});
     } catch (error) {
+      setError(true);
+      setLoading(false);
+      console.log(error);
+    }
+  };
+
+  const handleDeleteHabit = async () => {
+    try {
+      setLoading(true);
+      setError(false);
+      const res = await fetch(`/api/habit/delete/${selectedHabit._id}`, {
+        method: "DELETE",
+      });
+      
+      const data = await res.json();
+      if (data.success == false) {
+        setError(true);
+        setLoading(false);
+        console.log(data);
+        return;
+      }
+
+      setLoading(false);
+      setError(false);
+      fetchData();
+      handleCloseUpdateModal();
+    } catch (error) {
+      setLoading(false);
+      setError(true);
       console.log(error);
     }
   };
@@ -143,7 +175,7 @@ export default function Habits() {
         <div className="card-body">
           <table className="table table-striped">
             <thead>
-              <tr>
+              <tr >
                 <th scope="col">Habit Name</th>
                 <th scope="col">Description</th>
                 <th scope="col">Day 1</th>
@@ -173,13 +205,13 @@ export default function Habits() {
                 >
                   <td>{habit.habit}</td>
                   <td>{habit.description}</td>
-                  <td style={{backgroundColor: habit.day1 ? getColorForPercentage(habit.day1) : 'transparent'}}>{habit.day1}</td>
-                  <td style={{backgroundColor: habit.day2 ? getColorForPercentage(habit.day2) : 'transparent'}}>{habit.day2}</td>
-                  <td style={{backgroundColor: habit.day3 ? getColorForPercentage(habit.day3) : 'transparent'}}>{habit.day3}</td>
-                  <td style={{backgroundColor: habit.day4 ? getColorForPercentage(habit.day4) : 'transparent'}}>{habit.day4}</td>
-                  <td style={{backgroundColor: habit.day5 ? getColorForPercentage(habit.day5) : 'transparent'}}>{habit.day5}</td>
-                  <td style={{backgroundColor: habit.day6 ? getColorForPercentage(habit.day6) : 'transparent'}}>{habit.day6}</td>
-                  <td style={{backgroundColor: habit.day7 ? getColorForPercentage(habit.day7) : 'transparent'}}>{habit.day7}</td>
+                  <td className="color-transition" style={{backgroundColor: habit.day1 ? getColorForPercentage(habit.day1) : 'transparent'}}>{habit.day1}</td>
+                  <td className="color-transition" style={{backgroundColor: habit.day2 ? getColorForPercentage(habit.day2) : 'transparent'}}>{habit.day2}</td>
+                  <td className="color-transition" style={{backgroundColor: habit.day3 ? getColorForPercentage(habit.day3) : 'transparent'}}>{habit.day3}</td>
+                  <td className="color-transition" style={{backgroundColor: habit.day4 ? getColorForPercentage(habit.day4) : 'transparent'}}>{habit.day4}</td>
+                  <td className="color-transition" style={{backgroundColor: habit.day5 ? getColorForPercentage(habit.day5) : 'transparent'}}>{habit.day5}</td>
+                  <td className="color-transition" style={{backgroundColor: habit.day6 ? getColorForPercentage(habit.day6) : 'transparent'}}>{habit.day6}</td>
+                  <td className="color-transition" style={{backgroundColor: habit.day7 ? getColorForPercentage(habit.day7) : 'transparent'}}>{habit.day7}</td>
                 </tr>
               ))}
             </tbody>
@@ -196,7 +228,7 @@ export default function Habits() {
           }}
         >
           <div
-            className="card shadow"
+            className="card shadow insert_icon"
             style={{
               fontSize: "3rem",
               color: "green",
@@ -366,10 +398,17 @@ export default function Habits() {
               <div className="col-md-auto d-flex justify-content-center">
                 <button
                   type="submit"
-                  className="btn bg-success text-white mt-3"
+                  className="btn bg-success text-white mt-3 me-3"
                   disabled={loading}
                 >
                   {loading ? "Loading.." : "Update"}
+                </button>
+                <button
+                  className="btn bg-danger text-white mt-3"
+                  disabled={loading}
+                  onClick={handleDeleteHabit}
+                >
+                  {loading ? "Loading.." : "Delete"}
                 </button>
               </div>
             </form>

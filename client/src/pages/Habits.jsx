@@ -205,13 +205,13 @@ export default function Habits() {
                 >
                   <td>{habit.habit}</td>
                   <td>{habit.description}</td>
-                  <td className="color-transition" style={{backgroundColor: habit.day1 ? getColorForPercentage(habit.day1) : 'transparent'}}>{habit.day1}</td>
-                  <td className="color-transition" style={{backgroundColor: habit.day2 ? getColorForPercentage(habit.day2) : 'transparent'}}>{habit.day2}</td>
-                  <td className="color-transition" style={{backgroundColor: habit.day3 ? getColorForPercentage(habit.day3) : 'transparent'}}>{habit.day3}</td>
-                  <td className="color-transition" style={{backgroundColor: habit.day4 ? getColorForPercentage(habit.day4) : 'transparent'}}>{habit.day4}</td>
-                  <td className="color-transition" style={{backgroundColor: habit.day5 ? getColorForPercentage(habit.day5) : 'transparent'}}>{habit.day5}</td>
-                  <td className="color-transition" style={{backgroundColor: habit.day6 ? getColorForPercentage(habit.day6) : 'transparent'}}>{habit.day6}</td>
-                  <td className="color-transition" style={{backgroundColor: habit.day7 ? getColorForPercentage(habit.day7) : 'transparent'}}>{habit.day7}</td>
+                  <td className="color-transition" style={{backgroundColor: habit.day1!== null ? getColorForPercentage(habit.day1) : 'transparent'}}>{habit.day1}</td>
+                  <td className="color-transition" style={{backgroundColor: habit.day2!== null ? getColorForPercentage(habit.day2) : 'transparent'}}>{habit.day2}</td>
+                  <td className="color-transition" style={{backgroundColor: habit.day3!== null ? getColorForPercentage(habit.day3) : 'transparent'}}>{habit.day3}</td>
+                  <td className="color-transition" style={{backgroundColor: habit.day4!== null ? getColorForPercentage(habit.day4) : 'transparent'}}>{habit.day4}</td>
+                  <td className="color-transition" style={{backgroundColor: habit.day5!== null ? getColorForPercentage(habit.day5) : 'transparent'}}>{habit.day5}</td>
+                  <td className="color-transition" style={{backgroundColor: habit.day6!== null ? getColorForPercentage(habit.day6) : 'transparent'}}>{habit.day6}</td>
+                  <td className="color-transition" style={{backgroundColor: habit.day7!== null ? getColorForPercentage(habit.day7) : 'transparent'}}>{habit.day7}</td>
                 </tr>
               ))}
             </tbody>

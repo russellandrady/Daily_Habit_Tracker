@@ -33,7 +33,7 @@ export const login = async(req, res, next) => {
       );
       let expiryDate = new Date(Date.now() + 60 * 60 * 1000); // 1 hour from now
       res
-        .cookie("access_token", token, { httpOnly: true, expires: expiryDate })
+        .cookie("access_token", token, { httpOnly: true})
         .status(200)
         .json(rest); //we create a cookie named access_token with the token in client's browser that can only access by http. Not by third party apps. And finally we send the validUser credentials to the client
     } catch (error) {

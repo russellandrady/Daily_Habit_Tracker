@@ -8,6 +8,7 @@ import Profile from "./pages/Profile";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import PrivateRoute from "./components/PrivateRoute";
+import Habits from "./pages/Habits";
 
 export default function App() {
   return (
@@ -21,6 +22,9 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route element={<PrivateRoute />}>
           <Route path="/profile" element={<Profile />} />
+        </Route>
+        <Route element={<PrivateRoute />}>
+          <Route path="/habits" element={<Habits />} />
         </Route>
       </Routes>
       <Footer/>

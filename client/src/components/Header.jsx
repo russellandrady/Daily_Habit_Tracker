@@ -39,6 +39,10 @@ function Header() {
             
           </li>
           {currentUser &&<li>
+             <Link to="/habits">Habits</Link>
+            
+          </li>}
+          {currentUser &&<li>
              <Link onClick={handleSignOut}>Signout</Link>
             
           </li>}

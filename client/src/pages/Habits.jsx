@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import "../styles/Habit.css";
 import { Button, Modal } from "react-bootstrap";
 import { MdFormatListBulletedAdd } from "react-icons/md";
+import { set } from "mongoose";
 export default function Habits() {
   const [habits, setHabits] = useState([]);
   const [formdata, setFormdata] = useState({});
@@ -17,7 +18,7 @@ export default function Habits() {
   const handleShowUpdateModal = () => setShowUpdateModal(true);
   const [selectedHabit, setSelectedHabit] = useState({});
   const [formUpdatedData, setFormUpdatedData] = useState({});
-  console.log(formUpdatedData);
+  // console.log(selectedHabit);
   // console.log(formdata)
   const handleChange = (e) => {
     setFormdata({ ...formdata, [e.target.id]: e.target.value });
@@ -52,6 +53,34 @@ export default function Habits() {
   const handleUpdateChange = (e) => {
     setFormUpdatedData({ ...formUpdatedData, [e.target.id]: e.target.value });
   };
+  const handleUpdateSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      setLoading(true);
+      setError(false);
+      const res = await fetch(`/api/habit/update/${selectedHabit._id}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formUpdatedData),
+      });
+      const data = await res.json();
+      if (data.success == false) {
+        setError(true);
+        setLoading(false);
+        return;
+      }
+      setError(false);
+      fetchData();
+      setLoading(false);
+      handleCloseUpdateModal();
+      setFormUpdatedData({});
+      setSelectedHabit({});
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const fetchData = async () => {
     try {
@@ -70,6 +99,36 @@ export default function Habits() {
     fetchData();
   }, []);
 
+  //color changing mechanism
+
+  function interpolateColor(color1, color2, factor) {
+    const result = color1.slice();
+    for (let i = 0; i < 3; i++) {
+      result[i] = Math.round(result[i] + factor * (color2[i] - color1[i]));
+    }
+    return result;
+  }
+  function rgbToHex(color) {
+    return '#' + color.map((x) => {
+      const hex = x.toString(16);
+      return hex.length === 1 ? '0' + hex : hex;
+    }).join('');
+  }
+  function getColorForPercentage(pct) {
+    const percent = Math.max(Math.min(100, pct), 0) / 100;
+    let color1, color2;
+    if (percent < 0.5) {
+      color1 = [255, 0, 0];
+      color2 = [255, 255, 0];
+      pct = percent * 2;
+    } else {
+      color1 = [255, 255, 0];
+      color2 = [0, 255, 0];
+      pct = (percent - 0.5) * 2;
+    }
+    const color = interpolateColor(color1, color2, pct);
+    return rgbToHex(color);
+  }
   return (
     <div className="container mt-5 mx-auto" style={{ maxWidth: "1500px" }}>
       <div
@@ -114,13 +173,13 @@ export default function Habits() {
                 >
                   <td>{habit.habit}</td>
                   <td>{habit.description}</td>
-                  <td>{habit.day1}</td>
-                  <td>{habit.day2}</td>
-                  <td>{habit.day3}</td>
-                  <td>{habit.day4}</td>
-                  <td>{habit.day5}</td>
-                  <td>{habit.day6}</td>
-                  <td>{habit.day7}</td>
+                  <td style={{backgroundColor: habit.day1 ? getColorForPercentage(habit.day1) : 'transparent'}}>{habit.day1}</td>
+                  <td style={{backgroundColor: habit.day2 ? getColorForPercentage(habit.day2) : 'transparent'}}>{habit.day2}</td>
+                  <td style={{backgroundColor: habit.day3 ? getColorForPercentage(habit.day3) : 'transparent'}}>{habit.day3}</td>
+                  <td style={{backgroundColor: habit.day4 ? getColorForPercentage(habit.day4) : 'transparent'}}>{habit.day4}</td>
+                  <td style={{backgroundColor: habit.day5 ? getColorForPercentage(habit.day5) : 'transparent'}}>{habit.day5}</td>
+                  <td style={{backgroundColor: habit.day6 ? getColorForPercentage(habit.day6) : 'transparent'}}>{habit.day6}</td>
+                  <td style={{backgroundColor: habit.day7 ? getColorForPercentage(habit.day7) : 'transparent'}}>{habit.day7}</td>
                 </tr>
               ))}
             </tbody>
@@ -193,7 +252,7 @@ export default function Habits() {
             <Modal.Title>Update Habit</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <form >
+            <form onSubmit={handleUpdateSubmit}>
               <div className="form-group">
                 <label htmlFor="habit">Habit Name</label>
                 <input
@@ -202,7 +261,7 @@ export default function Habits() {
                   id="habit"
                   placeholder="Ex: Music composing"
                   name="habit"
-                  value={selectedHabit.habit}
+                  defaultValue={selectedHabit.habit}
                   onChange={handleUpdateChange}
                 />
               </div>
@@ -214,7 +273,7 @@ export default function Habits() {
                   id="description"
                   placeholder="The avg percentage of completion"
                   name="description"
-                  value={selectedHabit.description}
+                  defaultValue={selectedHabit.description}
                   onChange={handleUpdateChange}
                 />
               </div>
@@ -226,7 +285,7 @@ export default function Habits() {
                   id="day1"
                   placeholder="The avg percentage of completion"
                   name="day1"
-                  value={selectedHabit.day1}
+                  defaultValue={selectedHabit.day1}
                   onChange={handleUpdateChange}
                 />
               </div>
@@ -238,7 +297,7 @@ export default function Habits() {
                   id="day2"
                   placeholder="The avg percentage of completion"
                   name="day2"
-                  value={selectedHabit.day2}
+                  defaultValue={selectedHabit.day2}
                   onChange={handleUpdateChange}
                 />
               </div>
@@ -250,7 +309,7 @@ export default function Habits() {
                   id="day3"
                   placeholder="The avg percentage of completion"
                   name="day3"
-                  value={selectedHabit.day3}
+                  defaultValue={selectedHabit.day3}
                   onChange={handleUpdateChange}
                 />
                 
@@ -263,7 +322,7 @@ export default function Habits() {
                   id="day4"
                   placeholder="The avg percentage of completion"
                   name="day4"
-                  value={selectedHabit.day4}
+                  defaultValue={selectedHabit.day4}
                   onChange={handleUpdateChange}
                 />
               </div>
@@ -275,7 +334,7 @@ export default function Habits() {
                   id="day5"
                   placeholder="The avg percentage of completion"
                   name="day5"
-                  value={selectedHabit.day5}
+                  defaultValue={selectedHabit.day5}
                   onChange={handleUpdateChange}
                 />
               </div>
@@ -287,7 +346,7 @@ export default function Habits() {
                   id="day6"
                   placeholder="The avg percentage of completion"
                   name="day6"
-                  value={selectedHabit.day6}
+                  defaultValue={selectedHabit.day6}
                   onChange={handleUpdateChange}
                 />
               </div>
@@ -299,7 +358,7 @@ export default function Habits() {
                   id="day7"
                   placeholder="The avg percentage of completion"
                   name="day7"
-                  value={selectedHabit.day7}
+                  defaultValue={selectedHabit.day7}
                   onChange={handleUpdateChange}
                 />
               </div>

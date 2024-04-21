@@ -33,7 +33,7 @@ export default function Habits() {
   // console.log(selectedHabit);
   // console.log(formdata)
   const [graphData, setGraphData] = useState({});
-  console.log(graphData);
+  //console.log(graphData);
   const formatGraphData = (habit) => {
     return [
       { name: "Day 1", percentage: habit.day1 },
@@ -237,7 +237,7 @@ export default function Habits() {
           animation: "slideInFromLeft 0.2s ease-out",
         }}
       >
-        <div className="card-header text-center">Habit Completion Percentages</div>
+        <div className="card-header text-center">H a b i t s</div>
         <div className="card-body">
           <table className="table table-striped">
             <thead>

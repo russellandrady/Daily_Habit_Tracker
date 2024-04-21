@@ -13,10 +13,14 @@ function Header() {
     try {
       await fetch('/api/auth/signout');
       dispatch(signOut());
+      setMenuActive(false)
     } catch (error) {
       console.log(error);
     }
   }
+  const handleLinkClick = () => {
+    setMenuActive(false);
+  };
   return (
     <header className={menuActive ? "open" : ""}>
       <Link to="/" className="logo">
@@ -25,21 +29,21 @@ function Header() {
       <div className="group">
         <ul className="navigation">
           <li>
-            <Link to="/">Home</Link>
+            <Link to="/" onClick={handleLinkClick}>Home</Link>
           </li>
           <li>
-            <Link to="/about">About</Link>
+            <Link to="/about" onClick={handleLinkClick}>About</Link>
           </li>
           {!currentUser &&(<li>
-            <Link to="/register">Register</Link>
+            <Link to="/register" onClick={handleLinkClick}>Register</Link>
             
           </li>)}
           <li>
-            {currentUser ? <Link to="/profile">Profile</Link>:<Link to="/login">Login</Link>}
+            {currentUser ? <Link to="/profile" onClick={handleLinkClick}>Profile</Link>:<Link to="/login">Login</Link>}
             
           </li>
           {currentUser &&<li>
-             <Link to="/habits">Habits</Link>
+             <Link to="/habits" onClick={handleLinkClick}>Habits</Link>
             
           </li>}
           {currentUser &&<li>

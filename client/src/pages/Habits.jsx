@@ -32,7 +32,7 @@ export default function Habits() {
   const [formUpdatedData, setFormUpdatedData] = useState({});
   // console.log(selectedHabit);
   // console.log(formdata)
-  const [graphData, setGraphData] = useState({});
+  const [graphData, setGraphData] = useState([]);
   //console.log(graphData);
   const formatGraphData = (habit) => {
     return [
@@ -171,8 +171,7 @@ export default function Habits() {
 
   };
   const readyToStartANewWeek = () => {
-    const graphDataArray = Object.values(graphData);
-  return graphDataArray.every(data => data.percentage !== null);
+  return graphData.every(data => data.percentage !== null);
 };
 
   const fetchData = async () => {

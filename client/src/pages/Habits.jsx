@@ -357,8 +357,8 @@ export default function Habits() {
         <div
           style={{
             display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
+            justifyContent: "right",
+            alignItems: "right",
             marginTop: "10px",
           }}
         >

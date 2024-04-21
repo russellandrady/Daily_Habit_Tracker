@@ -23,7 +23,7 @@ function Header() {
   };
   return (
     <header className={menuActive ? "open" : ""}>
-      <Link to="/" className="logo">
+      <Link to="/" onClick={handleLinkClick} className="logo">
         Daily Habit Tracker
       </Link>
       <div className="group">
@@ -39,7 +39,7 @@ function Header() {
             
           </li>)}
           <li>
-            {currentUser ? <Link to="/profile" onClick={handleLinkClick}>Profile</Link>:<Link to="/login">Login</Link>}
+            {currentUser ? <Link to="/profile" onClick={handleLinkClick}>Profile</Link>:<Link to="/login" onClick={handleLinkClick}>Login</Link>}
             
           </li>
           {currentUser &&<li>

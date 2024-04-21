@@ -101,6 +101,7 @@ export default function Habits() {
       fetchData();
       setLoading(false);
       handleCloseUpdateModal();
+      console.log(formUpdatedData);
       setFormUpdatedData({});
       setSelectedHabit({});
     } catch (error) {
@@ -136,6 +137,43 @@ export default function Habits() {
       console.log(error);
     }
   };
+  const handleResetHabit = async(e) => {
+    e.preventDefault();
+    try {
+      setLoading(true);
+      setError(false);
+      const res = await fetch(`/api/habit/update/${selectedHabit._id}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({"day1": null, "day2": null, "day3": null, "day4": null, "day5": null, "day6": null, "day7": null}),
+      });
+      const data = await res.json();
+      if (data.success == false) {
+        setError(true);
+        setLoading(false);
+        return;
+      }
+      setError(false);
+      fetchData();
+      setLoading(false);
+      handleCloseUpdateModal();
+      setFormUpdatedData({});
+      setSelectedHabit({});
+    } catch (error) {
+      setError(true);
+      setLoading(false);
+      console.log(error);
+    }
+    
+    //setFormUpdatedData({ "day1": null, "day2": null, "day3": null, "day4": null, "day5": null, "day6": null, "day7": null });
+
+  };
+  const readyToStartANewWeek = () => {
+    const graphDataArray = Object.values(graphData);
+  return graphDataArray.every(data => data.percentage !== null);
+};
 
   const fetchData = async () => {
     try {
@@ -199,7 +237,7 @@ export default function Habits() {
           animation: "slideInFromLeft 0.2s ease-out",
         }}
       >
-        <div className="card-header text-center">Habits</div>
+        <div className="card-header text-center">Habit Completion Percentages</div>
         <div className="card-body">
           <table className="table table-striped">
             <thead>
@@ -496,18 +534,12 @@ export default function Habits() {
               <div className="col-md-auto d-flex justify-content-center">
                 <button
                   type="submit"
-                  className="btn bg-success text-white mt-3 me-3"
+                  className="btn bg-success text-white mt-3 btn_update"
                   disabled={loading}
                 >
                   {loading ? "Loading.." : "Update"}
                 </button>
-                <button
-                  className="btn bg-danger text-white mt-3"
-                  disabled={loading}
-                  onClick={handleDeleteHabit}
-                >
-                  {loading ? "Loading.." : "Delete"}
-                </button>
+                
               </div>
             </form>
             <div style={{ display: "flex", justifyContent: "center" }} className="bar_chart">
@@ -525,15 +557,22 @@ export default function Habits() {
                 <Bar dataKey="percentage" fill="#8884d8" />
               </BarChart>
             </div>
-            {/* <div className="col-md-auto d-flex justify-content-center">
+            <div className="col-md-auto d-flex justify-content-center ">
                 <button
-                  className="btn bg-danger text-white mt-3"
-                  disabled={loading}
+                  className="btn bg-warning text-white mt-3 me-3 btn_danger"
+                  disabled={loading || !readyToStartANewWeek()}
                   onClick={handleResetHabit}
                 >
-                  {loading ? "Loading.." : "Reset"}
+                  {loading ? "Loading.." : "Start a new week"}
                 </button>
-              </div> */}
+                <button
+                  className="btn bg-danger text-white mt-3 btn_danger2"
+                  disabled={loading}
+                  onClick={handleDeleteHabit}
+                >
+                  {loading ? "Loading.." : "Delete"}
+                </button>
+              </div>
           </Modal.Body>
         </Modal>
       </>

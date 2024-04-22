@@ -69,6 +69,7 @@ export default function Habits() {
       }
       fetchData();
       handleClose();
+      setFormdata({});
     } catch (error) {
       setLoading(false);
       setError(true);
@@ -390,6 +391,7 @@ export default function Habits() {
                   placeholder="Ex: Music composing"
                   name="habit"
                   onChange={handleChange}
+                  required
                 />
               </div>
               <div className="form-group">
@@ -401,6 +403,7 @@ export default function Habits() {
                   placeholder="Ex: From 6pm to 8pm"
                   name="description"
                   onChange={handleChange}
+                  required
                 />
               </div>
               <div className="col-md-auto d-flex justify-content-center">

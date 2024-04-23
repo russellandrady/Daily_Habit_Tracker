@@ -148,7 +148,15 @@ export default function Habits() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({"day1": null, "day2": null, "day3": null, "day4": null, "day5": null, "day6": null, "day7": null}),
+        body: JSON.stringify({
+          day1: null,
+          day2: null,
+          day3: null,
+          day4: null,
+          day5: null,
+          day6: null,
+          day7: null,
+        }),
       });
       const data = await res.json();
       if (data.success == false) {
@@ -167,13 +175,12 @@ export default function Habits() {
       setLoading(false);
       console.log(error);
     }
-    
-    //setFormUpdatedData({ "day1": null, "day2": null, "day3": null, "day4": null, "day5": null, "day6": null, "day7": null });
 
+    //setFormUpdatedData({ "day1": null, "day2": null, "day3": null, "day4": null, "day5": null, "day6": null, "day7": null });
   };
   const readyToStartANewWeek = () => {
-  return graphData.every(data => data.percentage !== null);
-};
+    return graphData.every((data) => data.percentage !== null);
+  };
 
   const fetchData = async () => {
     try {
@@ -541,10 +548,12 @@ export default function Habits() {
                 >
                   {loading ? "Loading.." : "Update"}
                 </button>
-                
               </div>
             </form>
-            <div style={{ display: "flex", justifyContent: "center" }} className="bar_chart">
+            <div
+              style={{ display: "flex", justifyContent: "center" }}
+              className="bar_chart"
+            >
               <BarChart
                 width={500}
                 height={300}
@@ -560,21 +569,21 @@ export default function Habits() {
               </BarChart>
             </div>
             <div className="col-md-auto d-flex justify-content-center ">
-                <button
-                  className="btn bg-warning text-white mt-3 me-3 btn_danger"
-                  disabled={loading || !readyToStartANewWeek()}
-                  onClick={handleResetHabit}
-                >
-                  {loading ? "Loading.." : "Start a new week"}
-                </button>
-                <button
-                  className="btn bg-danger text-white mt-3 btn_danger2"
-                  disabled={loading}
-                  onClick={handleDeleteHabit}
-                >
-                  {loading ? "Loading.." : "Delete"}
-                </button>
-              </div>
+              <button
+                className="btn bg-warning text-white mt-3 me-3 btn_danger"
+                disabled={loading || !readyToStartANewWeek()}
+                onClick={handleResetHabit}
+              >
+                {loading ? "Loading.." : "Start a new week"}
+              </button>
+              <button
+                className="btn bg-danger text-white mt-3 btn_danger2"
+                disabled={loading}
+                onClick={handleDeleteHabit}
+              >
+                {loading ? "Loading.." : "Delete"}
+              </button>
+            </div>
           </Modal.Body>
         </Modal>
       </>

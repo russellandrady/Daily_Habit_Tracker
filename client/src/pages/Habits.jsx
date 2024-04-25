@@ -11,16 +11,31 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
-import { useSelector,useDispatch } from "react-redux";
-import { habitGotAll, habitSubmitStart, habitSubmitSuccess, habitSubmitFailure, habitSubmitUpdateStart, habitSubmitUpdateSuccess, habitSubmitUpdateFailure, habitDeleteStart, habitDeleteSuccess, habitDeleteFailure, habitResetStart, habitResetSuccess, habitResetFailure, habitGotAllFailure } from "../../redux/user/userSlice";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  habitGotAll,
+  habitSubmitStart,
+  habitSubmitSuccess,
+  habitSubmitFailure,
+  habitSubmitUpdateStart,
+  habitSubmitUpdateSuccess,
+  habitSubmitUpdateFailure,
+  habitDeleteStart,
+  habitDeleteSuccess,
+  habitDeleteFailure,
+  habitResetStart,
+  habitResetSuccess,
+  habitResetFailure,
+  habitGotAllFailure,
+} from "../../redux/user/userSlice";
 export default function Habits() {
   //const [habits, setHabits] = useState([]);
   const [formdata, setFormdata] = useState({});
   // const [error, setError] = useState(false);
   // const [loading, setLoading] = useState(false);
-  const { error, loading,habits } = useSelector((state) => state.user);
+  const { error, loading, habits } = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  
+
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -123,7 +138,7 @@ export default function Habits() {
         return;
       }
 
-      dispatch(habitDeleteSuccess())
+      dispatch(habitDeleteSuccess());
       fetchData();
       handleCloseUpdateModal();
     } catch (error) {
@@ -131,7 +146,7 @@ export default function Habits() {
       console.log(error);
     }
   };
-  const handleResetHabit = async(e) => {
+  const handleResetHabit = async (e) => {
     e.preventDefault();
     try {
       dispatch(habitResetStart());

@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import "../styles/Habit.css";
 import { Button, Modal } from "react-bootstrap";
 import { MdFormatListBulletedAdd } from "react-icons/md";
-import { set } from "mongoose";
 import {
   BarChart,
   Bar,
@@ -12,12 +11,16 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
+import { useSelector,useDispatch } from "react-redux";
+import { habitGotAll, habitSubmitStart, habitSubmitSuccess, habitSubmitFailure, habitSubmitUpdateStart, habitSubmitUpdateSuccess, habitSubmitUpdateFailure, habitDeleteStart, habitDeleteSuccess, habitDeleteFailure, habitResetStart, habitResetSuccess, habitResetFailure, habitGotAllFailure } from "../../redux/user/userSlice";
 export default function Habits() {
-  const [habits, setHabits] = useState([]);
+  //const [habits, setHabits] = useState([]);
   const [formdata, setFormdata] = useState({});
-  const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
-
+  // const [error, setError] = useState(false);
+  // const [loading, setLoading] = useState(false);
+  const { error, loading,habits } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -51,8 +54,7 @@ export default function Habits() {
   };
   const handleSubmit = async (e) => {
     try {
-      setLoading(true);
-      setError(false);
+      dispatch(habitSubmitStart());
       e.preventDefault();
       const response = await fetch("/api/habit/create", {
         method: "POST",
@@ -62,18 +64,17 @@ export default function Habits() {
         body: JSON.stringify(formdata),
       });
       const data = await response.json();
-      setLoading(false);
+
       if (data.success === false) {
-        setError(true);
+        dispatch(habitSubmitFailure(data.message));
         return;
       }
+      dispatch(habitSubmitSuccess());
       fetchData();
       handleClose();
       setFormdata({});
     } catch (error) {
-      setLoading(false);
-      setError(true);
-      console.log(error);
+      dispatch(habitSubmitFailure(error));
     }
   };
 
@@ -83,8 +84,7 @@ export default function Habits() {
   const handleUpdateSubmit = async (e) => {
     e.preventDefault();
     try {
-      setLoading(true);
-      setError(false);
+      dispatch(habitSubmitUpdateStart());
       const res = await fetch(`/api/habit/update/${selectedHabit._id}`, {
         method: "POST",
         headers: {
@@ -94,55 +94,47 @@ export default function Habits() {
       });
       const data = await res.json();
       if (data.success == false) {
-        setError(true);
-        setLoading(false);
+        dispatch(habitSubmitUpdateFailure(data.message));
         return;
       }
-      setError(false);
+      dispatch(habitSubmitUpdateSuccess());
       fetchData();
-      setLoading(false);
       handleCloseUpdateModal();
       console.log(formUpdatedData);
       setFormUpdatedData({});
       setSelectedHabit({});
     } catch (error) {
-      setError(true);
-      setLoading(false);
+      habitSubmitUpdateFailure(error);
       console.log(error);
     }
   };
 
   const handleDeleteHabit = async () => {
     try {
-      setLoading(true);
-      setError(false);
+      dispatch(habitDeleteStart());
       const res = await fetch(`/api/habit/delete/${selectedHabit._id}`, {
         method: "DELETE",
       });
 
       const data = await res.json();
       if (data.success == false) {
-        setError(true);
-        setLoading(false);
+        dispatch(habitDeleteFailure(data.message));
         console.log(data);
         return;
       }
 
-      setLoading(false);
-      setError(false);
+      dispatch(habitDeleteSuccess())
       fetchData();
       handleCloseUpdateModal();
     } catch (error) {
-      setLoading(false);
-      setError(true);
+      habitDeleteFailure(error);
       console.log(error);
     }
   };
   const handleResetHabit = async(e) => {
     e.preventDefault();
     try {
-      setLoading(true);
-      setError(false);
+      dispatch(habitResetStart());
       const res = await fetch(`/api/habit/update/${selectedHabit._id}`, {
         method: "POST",
         headers: {
@@ -160,19 +152,16 @@ export default function Habits() {
       });
       const data = await res.json();
       if (data.success == false) {
-        setError(true);
-        setLoading(false);
+        dispatch(habitResetFailure(data.message));
         return;
       }
-      setError(false);
+      dispatch(habitResetSuccess());
       fetchData();
-      setLoading(false);
       handleCloseUpdateModal();
       setFormUpdatedData({});
       setSelectedHabit({});
     } catch (error) {
-      setError(true);
-      setLoading(false);
+      dispatch(habitResetFailure(error));
       console.log(error);
     }
 
@@ -186,12 +175,12 @@ export default function Habits() {
     try {
       const response = await fetch("/api/habit/all");
       if (!response.ok) {
-        setError(true);
+        dispatch(habitGotAllFailure("Failed to fetch data"));
       }
       const data = await response.json();
-      setHabits(data);
+      dispatch(habitGotAll(data));
     } catch (error) {
-      setError(true);
+      dispatch(habitGotAllFailure(error));
     }
   };
 

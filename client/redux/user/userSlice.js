@@ -85,7 +85,7 @@ const userSlice = createSlice({
     },
     habitSubmitUpdateSuccess(state) {
       state.loading = false;
-      state,error = false;
+      state.error = false;
     },
     habitSubmitUpdateFailure(state, action) {
       state.loading = false;

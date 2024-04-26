@@ -33,12 +33,13 @@ export default function Habits() {
   const [formdata, setFormdata] = useState({});
   // const [error, setError] = useState(false);
   // const [loading, setLoading] = useState(false);
-  const { error, loading, habits } = useSelector((state) => state.user);
+  const { error, loading, habits} = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  // console.log(habits );
 
   const [showUpdateModal, setShowUpdateModal] = useState(false);
   const handleCloseUpdateModal = () => {
@@ -200,7 +201,9 @@ export default function Habits() {
   };
 
   useEffect(() => {
+    if(habits.length === 0){
     fetchData();
+    }
   }, []);
 
   //color changing mechanism
@@ -265,7 +268,7 @@ export default function Habits() {
               </tr>
             </thead>
             <tbody>
-              {habits.map((habit) => (
+              {(Array.isArray(habits) ? habits : []).map((habit) => (
                 <tr
                   key={habit._id}
                   className="tr-hover"

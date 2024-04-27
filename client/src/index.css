@@ -11,3 +11,11 @@ body{
     background-image: url('styles/bg.jpg');
     background-size: cover;
 }
+.card-react{
+	transition: 0.5s;
+
+}
+.card-react:hover{
+	transform: translateY(-5px);
+
+}

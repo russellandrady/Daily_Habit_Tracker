@@ -14,7 +14,6 @@
 	width: 890px; /* You can adjust as needed */
 	background-size: cover;
 	background-repeat: no-repeat;
-	border-radius: 50px;
   }
   .carousel-image2 {
 	background-image: url('./carousel2.jpg');
@@ -22,7 +21,6 @@
 	width: 890px; /* You can adjust as needed */
 	background-size: cover;
 	background-repeat: no-repeat;
-	border-radius: 50px;
   }
   .carousel-image3 {
 	background-image: url('./carousel3.jpg');
@@ -30,9 +28,14 @@
 	width: 900px; /* You can adjust as needed */
 	background-size: cover;
 	background-repeat: no-repeat;
-	border-radius: 50px;
   }
   .carousel-item-custom {
 	
+	overflow: hidden;
 	border-radius: 50px; /* adjust as needed */
   }
+  .checks{
+	border:solid 1px #000;
+	
+  }
+

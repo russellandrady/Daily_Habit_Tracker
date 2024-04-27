@@ -1,0 +1,38 @@
+@keyframes slideInFromLeft {
+	0% {
+		transform: translateX(-300px);
+		opacity: 0;
+	}
+	100% {
+		transform: translateX(0);
+		opacity: 1;
+	}
+}
+.carousel-image1 {
+	background-image: url('./carousel1.jpg');
+	height: 400px; /* You can adjust as needed */
+	width: 890px; /* You can adjust as needed */
+	background-size: cover;
+	background-repeat: no-repeat;
+	border-radius: 50px;
+  }
+  .carousel-image2 {
+	background-image: url('./carousel2.jpg');
+	height: 400px; /* You can adjust as needed */
+	width: 890px; /* You can adjust as needed */
+	background-size: cover;
+	background-repeat: no-repeat;
+	border-radius: 50px;
+  }
+  .carousel-image3 {
+	background-image: url('./carousel3.jpg');
+	height: 400px; /* You can adjust as needed */
+	width: 900px; /* You can adjust as needed */
+	background-size: cover;
+	background-repeat: no-repeat;
+	border-radius: 50px;
+  }
+  .carousel-item-custom {
+	
+	border-radius: 50px; /* adjust as needed */
+  }

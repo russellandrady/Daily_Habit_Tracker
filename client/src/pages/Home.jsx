@@ -5,11 +5,9 @@ import "../styles/Home.css";
 import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import Accordion from "react-bootstrap/Accordion";
-import { useSelector } from "react-redux";
 
 
 export default function Home() {
-  const { currentUser } = useSelector((state) => state.user);
 
   return (
     <div
@@ -79,7 +77,7 @@ export default function Home() {
       >
         <div className="row gx-4 gx-lg-5 align-items-stretch my-5 mx-2">
           <div className="col-lg-4">
-            <Accordion defaultActiveKey={currentUser ? "1" : "0"}>
+            <Accordion>
               <Accordion.Item eventKey="0" className="border-0" >
                 <Card className="h-100 border-0 shadow card-react">
                   <Card.Body>
@@ -103,7 +101,7 @@ export default function Home() {
             </Accordion>
           </div>
           <div className="col-lg-4">
-            <Accordion defaultActiveKey={currentUser ? "1" : "0"}>
+            <Accordion>
               <Accordion.Item eventKey="0" className="border-0">
                 <Card className="h-100 border-0 shadow card-react">
                   <Card.Body>
@@ -133,7 +131,7 @@ export default function Home() {
             </Accordion>
           </div>
           <div className="col-lg-4">
-            <Accordion defaultActiveKey={currentUser ? "1" : "0"}>
+            <Accordion>
               <Accordion.Item eventKey="0" className="border-0">
                 <Card className="h-100 border-0 shadow card-react">
                   <Card.Body>
@@ -174,7 +172,7 @@ export default function Home() {
       >
         <div className="row gx-4 gx-lg-5 align-items-stretch my-5 mx-2">
           <div className="col-lg-4">
-            <Accordion defaultActiveKey={currentUser ? "1" : "0"}>
+            <Accordion>
               <Accordion.Item eventKey="0" className="border-0">
                 <Card className="h-100 border-0 shadow card-react">
                   <Card.Body>
@@ -204,7 +202,7 @@ export default function Home() {
             </Accordion>
           </div>
           <div className="col-lg-4">
-            <Accordion defaultActiveKey={currentUser ? "1" : "0"}>
+            <Accordion>
               <Accordion.Item eventKey="0" className="border-0">
                 <Card className="h-100 border-0 shadow card-react">
                   <Card.Body>
@@ -228,7 +226,7 @@ export default function Home() {
             </Accordion>
           </div>
           <div className="col-lg-4">
-            <Accordion defaultActiveKey={currentUser ? "1" : "0"}>
+            <Accordion>
               <Accordion.Item eventKey="0" className="border-0">
                 <Card className="h-100 border-0 shadow card-react">
                   <Card.Body>

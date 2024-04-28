@@ -2,15 +2,16 @@ body
 {
 	align-items: flex-end;
 	min-height: 100vh;
-	background: #fff;
+	background: #000000;
 	position: bottom;
+	
 
 }
 footer
 {
 	position: relative;
     width: 100%;
-    background: #030303;
+    background: #ffffff;
     min-height: 100px;
     padding: 20px 50px;
     display: flex;
@@ -20,6 +21,8 @@ footer
 	margin-top: 100px;
 	margin-bottom: 0px;
 	bottom: 0;
+	box-shadow: 0px -40px 45px rgba(0, 0, 0, 1);
+	animation: slideInFromLeft 0.2s ease-out;
 }
 footer .social_icon,
 footer .menu
@@ -31,6 +34,7 @@ footer .menu
 	margin: 5px 0;
 	margin-right: 30px;
 	flex-wrap: wrap;
+	
 }
 footer .social_icon li,
 footer .menu li
@@ -42,7 +46,7 @@ footer .social_icon li a,
 footer .menu li a
 {
 	font-size: 2em;
-	color: #fff;
+	color: #707070;
 	margin: 0 5px;
 	display: inline-block;
 	transition: 0.5s;
@@ -55,7 +59,7 @@ footer .social_icon li a:hover
 footer .menu li a
 {
 	font-size: 1em;
-	color: #fff;
+	color: #ffffff;
 	margin: 0 10px;
 	display: inline-block;
 	text-decoration: none;
@@ -84,7 +88,7 @@ footer .wave
 	left: 0;
 	width: 100%;
 	height: 100px;
-	background: url(wave2.png);
+	background: url(wave3.png);
 	background-size: 1000px 100px;
 
 }
@@ -139,5 +143,15 @@ footer .wave#wave4
 	100%
 	{
 		background-position-x: 1000px;
+	}
+}
+@keyframes slideInFromLeft {
+	0% {
+		transform: translateX(-300px);
+		opacity: 0;
+	}
+	100% {
+		transform: translateX(0);
+		opacity: 1;
 	}
 }

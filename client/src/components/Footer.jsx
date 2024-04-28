@@ -12,7 +12,7 @@ function Header() {
       </div>
       <div className="container text-center">
         <div className="row">
-          <div className="col footercontext text-white">
+          <div className="col footercontext text-dark">
             Grow Slowly Like a Tree
           </div>
           <div className="col">
@@ -28,7 +28,7 @@ function Header() {
                 </a>
               </li>
               <li>
-                <a href="#">
+                <a href="https://www.linkedin.com/in/russellandrady/" target="_blank">
                   <ion-icon name="logo-linkedin"></ion-icon>
                 </a>
               </li>
@@ -39,7 +39,7 @@ function Header() {
               </li>
             </ul>
           </div>
-          <div className="col footercontext text-white">
+          <div className="col footercontext text-dark">
             <div>&copy; All rights reserved</div>
           </div>
         </div>

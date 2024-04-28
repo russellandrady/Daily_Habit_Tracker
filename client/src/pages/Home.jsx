@@ -5,9 +5,12 @@ import "../styles/Home.css";
 import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import Accordion from "react-bootstrap/Accordion";
-import Button from "react-bootstrap/Button";
+import { useSelector } from "react-redux";
+
 
 export default function Home() {
+  const { currentUser } = useSelector((state) => state.user);
+
   return (
     <div
       style={{
@@ -67,17 +70,17 @@ export default function Home() {
         </div>
       </div>
       <div
-        className=" mx-5 my-5"
+        className=" card shadow qnacard mx-5 my-5"
         style={{
           zIndex: "1",
           margin: "auto",
           animation: "slideInFromLeft 0.2s ease-out",
         }}
       >
-        <div className="row gx-4 gx-lg-5 align-items-stretch my-5">
+        <div className="row gx-4 gx-lg-5 align-items-stretch my-5 mx-2">
           <div className="col-lg-4">
-            <Accordion>
-              <Accordion.Item eventKey="0">
+            <Accordion defaultActiveKey={currentUser ? "1" : "0"}>
+              <Accordion.Item eventKey="0" className="border-0" >
                 <Card className="h-100 border-0 shadow card-react">
                   <Card.Body>
                     <Accordion.Header>
@@ -100,8 +103,8 @@ export default function Home() {
             </Accordion>
           </div>
           <div className="col-lg-4">
-            <Accordion>
-              <Accordion.Item eventKey="0">
+            <Accordion defaultActiveKey={currentUser ? "1" : "0"}>
+              <Accordion.Item eventKey="0" className="border-0">
                 <Card className="h-100 border-0 shadow card-react">
                   <Card.Body>
                     <Accordion.Header>
@@ -130,8 +133,8 @@ export default function Home() {
             </Accordion>
           </div>
           <div className="col-lg-4">
-            <Accordion>
-              <Accordion.Item eventKey="0">
+            <Accordion defaultActiveKey={currentUser ? "1" : "0"}>
+              <Accordion.Item eventKey="0" className="border-0">
                 <Card className="h-100 border-0 shadow card-react">
                   <Card.Body>
                     <Accordion.Header>
@@ -162,17 +165,17 @@ export default function Home() {
         </div>
       </div>
       <div
-        className=" mx-5 my-5"
+        className=" card shadow qnacard mx-5 my-5"
         style={{
           zIndex: "1",
           margin: "auto",
           animation: "slideInFromLeft 0.2s ease-out",
         }}
       >
-        <div className="row gx-4 gx-lg-5 align-items-stretch my-5">
+        <div className="row gx-4 gx-lg-5 align-items-stretch my-5 mx-2">
           <div className="col-lg-4">
-            <Accordion>
-              <Accordion.Item eventKey="0">
+            <Accordion defaultActiveKey={currentUser ? "1" : "0"}>
+              <Accordion.Item eventKey="0" className="border-0">
                 <Card className="h-100 border-0 shadow card-react">
                   <Card.Body>
                     <Accordion.Header>
@@ -201,8 +204,8 @@ export default function Home() {
             </Accordion>
           </div>
           <div className="col-lg-4">
-            <Accordion>
-              <Accordion.Item eventKey="0">
+            <Accordion defaultActiveKey={currentUser ? "1" : "0"}>
+              <Accordion.Item eventKey="0" className="border-0">
                 <Card className="h-100 border-0 shadow card-react">
                   <Card.Body>
                     <Accordion.Header>
@@ -212,11 +215,11 @@ export default function Home() {
                     </Accordion.Header>
                     <Accordion.Body>
                       <Card.Text>
-                        Not for sure. This is not for making pain. Once your progress feels good, you can
+                        Not for sure. Once your progress feels good, you can
                         continue the habit and enjoy the tracking and weekly
-                        results. Then you may feel you are not enjoying tracking anymore.
-                        Then you don't need to track it anymore. You can stop the
-                        tracking and delete the habit. Your mind will keep helping to do it. The taste. Taste has ultimate energy.
+                        results. After sometime, you may feel you are not enjoying tracking anymore.
+                        Then you stop the
+                        tracking and delete the habit. Don't be messed up. Your mind will keep helping to do it. The taste. Taste has ultimate energy.
                       </Card.Text>
                     </Accordion.Body>
                   </Card.Body>
@@ -225,8 +228,8 @@ export default function Home() {
             </Accordion>
           </div>
           <div className="col-lg-4">
-            <Accordion>
-              <Accordion.Item eventKey="0">
+            <Accordion defaultActiveKey={currentUser ? "1" : "0"}>
+              <Accordion.Item eventKey="0" className="border-0">
                 <Card className="h-100 border-0 shadow card-react">
                   <Card.Body>
                     <Accordion.Header>

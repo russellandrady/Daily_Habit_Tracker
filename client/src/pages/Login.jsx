@@ -40,7 +40,7 @@ export default function Login() {
         return;
       }
       dispatch(signInSuccess(data));
-      navigate("/");
+      navigate("/habits");
     } catch (error) {
       dispatch(signInFailure(error)); //pass the error as the payload.
     }

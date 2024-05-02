@@ -196,7 +196,7 @@ export default function Habits() {
       const data = await response.json();
       dispatch(habitGotAll(data));
     } catch (error) {
-      dispatch(habitGotAllFailure(error));
+      dispatch(habitGotAllFailure(error+"asdg"));
     }
   };
 

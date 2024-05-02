@@ -86,7 +86,7 @@ header .search
 	width: 100%;
 	height: 100%;
 	display: flex;
-	background: #f39b72;
+	background: #ffffff;
 	align-items: center;
 	padding: 0 30px;
 	transition: 0.3s ease-in-out;
@@ -106,7 +106,7 @@ header .search
 	height: 50px;
 	color: #0d0d0c;
 	font-size: 1.25em;
-	background: #f39b72;
+	background: #ffffff;
 	border-bottom: 1px solid rgba(0, 0, 0, 0.5);
 
 }
@@ -175,7 +175,7 @@ header .search
 		left: 0;
 		display: flex;
 		flex-direction: column;
-		background: #f39b72;
+		background: #ffffff;
 		width: 100%;
 		height: calc(100vh+80px);
 		padding: 40px;

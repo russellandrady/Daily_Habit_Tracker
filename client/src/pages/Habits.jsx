@@ -252,7 +252,7 @@ export default function Habits() {
         }}
       >
         <div className="card-header text-center">H a b i t s</div>
-        <div className="card-body">
+        <div className="card-body table-responsive">
           <table className="table table-striped">
             <thead>
               <tr>

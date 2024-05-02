@@ -4,20 +4,25 @@ import "../styles/Header.css";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { signOut } from "../../redux/user/userSlice";
+import { useNavigate } from "react-router-dom";
 
 function Header() {
   const [menuActive, setMenuActive] = useState(false);
   const { currentUser } = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  const handleSignOut = async()=>{//to use fetch this should be async
+  const navigate = useNavigate();
+
+  const handleSignOut = async () => {
+    //to use fetch this should be async
     try {
-      await fetch('/api/auth/signout');
+      await fetch("/api/auth/signout");
       dispatch(signOut());
-      setMenuActive(false)
+      setMenuActive(false);
+      navigate("/");
     } catch (error) {
       console.log(error);
     }
-  }
+  };
   const handleLinkClick = () => {
     setMenuActive(false);
   };
@@ -29,27 +34,45 @@ function Header() {
       <div className="group">
         <ul className="navigation">
           <li>
-            <Link to="/" onClick={handleLinkClick}>Home</Link>
+            <Link to="/" onClick={handleLinkClick}>
+              Home
+            </Link>
           </li>
           <li>
-            <Link to="/about" onClick={handleLinkClick}>About</Link>
+            <Link to="/about" onClick={handleLinkClick}>
+              About
+            </Link>
           </li>
-          {!currentUser &&(<li>
-            <Link to="/register" onClick={handleLinkClick}>Register</Link>
-            
-          </li>)}
+          {!currentUser && (
+            <li>
+              <Link to="/register" onClick={handleLinkClick}>
+                Register
+              </Link>
+            </li>
+          )}
           <li>
-            {currentUser ? <Link to="/profile" onClick={handleLinkClick}>Profile</Link>:<Link to="/login" onClick={handleLinkClick}>Login</Link>}
-            
+            {currentUser ? (
+              <Link to="/profile" onClick={handleLinkClick}>
+                Profile
+              </Link>
+            ) : (
+              <Link to="/login" onClick={handleLinkClick}>
+                Login
+              </Link>
+            )}
           </li>
-          {currentUser &&<li>
-             <Link to="/habits" onClick={handleLinkClick}>Habits</Link>
-            
-          </li>}
-          {currentUser &&<li>
-             <Link onClick={handleSignOut}>Signout</Link>
-            
-          </li>}
+          {currentUser && (
+            <li>
+              <Link to="/habits" onClick={handleLinkClick}>
+                Habits
+              </Link>
+            </li>
+          )}
+          {currentUser && (
+            <li>
+              <Link onClick={handleSignOut}>Signout</Link>
+            </li>
+          )}
         </ul>
         <ion-icon
           name="menu-outline"

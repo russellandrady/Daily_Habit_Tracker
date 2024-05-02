@@ -58,7 +58,7 @@ export default function About() {
               daily and see the progress and decide what to do before you forget
               the progress. The system was developed by Russell Andrady. He is a
               computer science student of faculty of computing and technology in
-              university of kaleniya in Srilanka. If you have any questions,
+              university of kelaniya in Srilanka. If you have any questions,
               just feel free to contact him.
             </p>
           </div>

@@ -20,16 +20,11 @@ mongoose
 
 const app = express();
 const __dirname = path.resolve();
-app.use(express.static(path.join(__dirname, '/client/dist')));
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
-});
+
 
 app.use(express.json());//alow json as the input our backend in order to test the api.
 app.use(cookieParser());
-app.listen(3000, () => {
-  console.log("Server is running on port 3000");
-});
+
 
 app.get("/", (req, res) => {
   res.json({ message: "Hello World" });
@@ -47,4 +42,12 @@ app.use((err,req,res,next) => {
     message,
     statusCode,
   });
+});
+app.use(express.static(path.join(__dirname, '/client/dist')));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
+});
+
+app.listen(3000, () => {
+  console.log("Server is running on port 3000");
 });

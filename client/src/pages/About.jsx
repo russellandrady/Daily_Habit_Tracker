@@ -10,7 +10,7 @@ import {
 } from "../../redux/user/userSlice";
 
 export default function About() {
-  const { loading, error } = useSelector((state) => state.user);
+  const { currentUser, loading, error } = useSelector((state) => state.user);
   const [contactAlert, setContactAlert] = useState(false);
   const form = useRef();
   const dispatch = useDispatch();
@@ -87,6 +87,7 @@ export default function About() {
                   id="email"
                   placeholder="Email"
                   name="user_email"
+                  defaultValue={currentUser ? currentUser.email : ""}
                   required
                 />
               </div>
@@ -98,6 +99,7 @@ export default function About() {
                   id="username"
                   placeholder="username"
                   name="user_name"
+                  defaultValue={currentUser ? currentUser.username : ""}
                   required
                 />
               </div>

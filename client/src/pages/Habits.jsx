@@ -33,7 +33,7 @@ export default function Habits() {
   const [formdata, setFormdata] = useState({});
   // const [error, setError] = useState(false);
   // const [loading, setLoading] = useState(false);
-  const { error, loading, habits} = useSelector((state) => state.user);
+  const { error, loading, habits, currentUser} = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   const [show, setShow] = useState(false);
@@ -189,7 +189,7 @@ export default function Habits() {
 
   const fetchData = async () => {
   try {
-    const response = await fetch("/api/habit/all");
+    const response = await fetch(`/api/habit/all/${currentUser._id}`);
     if (response.ok) {
       const data = await response.json();
       dispatch(habitGotAll(data));

@@ -5,6 +5,7 @@ import userRoutes from "./routes/user.route.js";
 import authRoutes from "./routes/auth.route.js";
 import habitRoutes from "./routes/habit.route.js";
 import cookieParser from "cookie-parser";
+import path from "path";
 dotenv.config();
 
 mongoose
@@ -16,7 +17,13 @@ mongoose
     console.log(err);
   });
 
+const __dirname = path.resolve();
 const app = express();
+app.use(express.static(path.join(__dirname, '/client/dist')));
+app.get('*', (req, res)=>{
+  res.sendFile(path.join(__dirname, 'client','dist','index.html'));
+});
+
 app.use(express.json());//alow json as the input our backend in order to test the api.
 app.use(cookieParser());
 app.listen(3000, () => {

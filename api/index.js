@@ -24,7 +24,7 @@ const __dirname = path.resolve();
 
 app.use(express.json());//alow json as the input our backend in order to test the api.
 app.use(cookieParser());
-
+app.use(express.static(path.join(__dirname, '/client/dist')));
 
 app.get("/", (req, res) => {
   res.json({ message: "Hello World" });
@@ -43,7 +43,7 @@ app.use((err,req,res,next) => {
     statusCode,
   });
 });
-app.use(express.static(path.join(__dirname, '/client/dist')));
+
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
 });

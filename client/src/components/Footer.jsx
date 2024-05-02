@@ -17,26 +17,26 @@ function Header() {
           </div>
           <div className="col">
             <ul className="social_icon">
-              <li>
+              {/* <li>
                 <a href="#">
-                  <ion-icon name="logo-facebook"></ion-icon>
+                  <ion-icon name="logo-whatsapp"></ion-icon>
                 </a>
               </li>
               <li>
                 <a href="#">
-                  <ion-icon name="logo-twitter"></ion-icon>
+                  <ion-icon name="logo-github"></ion-icon>
                 </a>
-              </li>
+              </li> */}
               <li>
                 <a href="https://www.linkedin.com/in/russellandrady/" target="_blank">
                   <ion-icon name="logo-linkedin"></ion-icon>
                 </a>
               </li>
-              <li>
+              {/* <li>
                 <a href="#">
                   <ion-icon name="logo-instagram"></ion-icon>
                 </a>
-              </li>
+              </li> */}
             </ul>
           </div>
           <div className="col footercontext text-dark">

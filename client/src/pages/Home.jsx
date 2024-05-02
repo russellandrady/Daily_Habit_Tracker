@@ -45,10 +45,10 @@ export default function Home() {
             </Carousel>
           </div>
           <div className="col-lg-5">
-            <h3 className="font-weight-light text-center ">
+            <h4 className="font-weight-light text-center ">
               .......Welcome.......
-            </h3>
-            <p>
+            </h4>
+            <p className="justified-text">
               This is Daily Habit Tracker, which gives you ability to track your
               habits. It offers you an easy and coherent way to view your habits
               and how the progress of each habits at the end of a week. It helps
@@ -87,7 +87,7 @@ export default function Home() {
                       </Card.Header>
                     </Accordion.Header>
                     <Accordion.Body>
-                      <Card.Text>
+                      <Card.Text className="justified-text">
                         You wanna build habits but you forget it sometimes and
                         it breaks the loop. Or you know you should build a
                         particular habit, but you doesn't feel pleasure while
@@ -111,7 +111,7 @@ export default function Home() {
                       </Card.Header>
                     </Accordion.Header>
                     <Accordion.Body>
-                      <Card.Text>
+                      <Card.Text className="justified-text">
                         Once you register and signed in, you can create habits
                         as much as you want. But at the beginning, we recommend
                         you to add one habit and track it daily to see the
@@ -141,7 +141,7 @@ export default function Home() {
                       </Card.Header>
                     </Accordion.Header>
                     <Accordion.Body>
-                      <Card.Text>
+                      <Card.Text className="justified-text">
                         Progress can be seen when you click on a habit and
                         scroll down, by a nice bar graph. After seeing the
                         progress at the end of a week, you can plan how you
@@ -182,7 +182,7 @@ export default function Home() {
                       </Card.Header>
                     </Accordion.Header>
                     <Accordion.Body>
-                      <Card.Text>
+                      <Card.Text className="justified-text">
                         If it doesn’t feel good, we recommend you to reduce the
                         time you spend and start smaller. Even though you feel
                         like you can only concentrate 1 second on a habit, start
@@ -212,7 +212,7 @@ export default function Home() {
                       </Card.Header>
                     </Accordion.Header>
                     <Accordion.Body>
-                      <Card.Text>
+                      <Card.Text className="justified-text">
                         Not for sure. Once your progress feels good, you can
                         continue the habit and enjoy the tracking and weekly
                         results. After sometime, you may feel you are not enjoying tracking anymore.
@@ -236,7 +236,7 @@ export default function Home() {
                       </Card.Header>
                     </Accordion.Header>
                     <Accordion.Body>
-                      <Card.Text>
+                      <Card.Text className="justified-text">
                         If you feel hard to decide the exact percentage you did
                         on your habit, when comparing to the daily amount of work that you thought
                         to do, just use multiplications of 10. When you keep

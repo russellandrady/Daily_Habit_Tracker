@@ -35,7 +35,7 @@ export default function Register() {
     }
   };
   return (
-    <div className="container mt-5 mx-auto" style={{ maxWidth: "500px" }}>
+    <div className="container mt-5 mx-auto" style={{ maxWidth: "500px",marginBottom: "calc(100vh - 570px)" }}>
       <div
         className="card shadow"
         style={{

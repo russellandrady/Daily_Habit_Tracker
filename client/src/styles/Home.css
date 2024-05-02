@@ -51,6 +51,9 @@
 	animation: gradient 5s ease infinite;
 	border-radius: 15px;
   }
+  .justified-text {
+	text-align: justify;
+  }
 
 @keyframes gradient {
 	0% {

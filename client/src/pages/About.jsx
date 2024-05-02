@@ -50,10 +50,10 @@ export default function About() {
       <div className="card shadow mx-2 my-5">
         <div className="row gx-4 gx-lg-5 align-items-center my-5 mx-auto ">
           <div>
-            <h3 className="font-weight-light text-center ">
+            <h4 className="font-weight-light text-center ">
               .......Why and From Where This Came.......
-            </h3>
-            <p>
+            </h4>
+            <p className="justified-text">
               Once again daily habit tracker is for easily track your habits
               daily and see the progress and decide what to do before you forget
               the progress. The system was developed by Russell Andrady. He is a

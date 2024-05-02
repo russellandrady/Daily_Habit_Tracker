@@ -9,21 +9,23 @@ body
 }
 footer
 {
-	position: relative;
+	position: sticky;
     width: 100%;
+
     background: #ffffff;
     min-height: 100px;
     padding: 20px 50px;
-    display: flex;
-    justify-content: center;
     align-items: center;
     flex-direction: column;
 	margin-top: 100px;
 	margin-bottom: 0px;
-	bottom: 0;
+	bottom: 0px;
 	box-shadow: 0px -40px 45px rgba(0, 0, 0, 1);
 	animation: slideInFromLeft 0.2s ease-out;
+	
+
 }
+
 footer .social_icon,
 footer .menu
 {

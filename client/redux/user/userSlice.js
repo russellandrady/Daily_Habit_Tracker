@@ -115,6 +115,18 @@ const userSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
+    contactStart(state) {
+      state.loading = true;
+      state.error = false;
+    },
+    contactSuccess(state) {
+      state.loading = false;
+      state.error = false;
+    },
+    contactFailure(state, action) {
+      state.loading = false;
+      state.error = action.payload;
+    },
   },
 });
 export const {
@@ -144,5 +156,8 @@ export const {
   habitResetStart,
   habitResetSuccess,
   habitResetFailure,
+  contactStart,
+  contactSuccess,
+  contactFailure,
 } = userSlice.actions;
 export default userSlice.reducer;

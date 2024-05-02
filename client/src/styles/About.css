@@ -1,0 +1,65 @@
+@keyframes slideInFromLeft {
+	0% {
+		transform: translateX(-300px);
+		opacity: 0;
+	}
+	100% {
+		transform: translateX(0);
+		opacity: 1;
+	}
+}
+.carousel-image1 {
+	background-image: url('./carousel1.jpg');
+	height: 400px; /* You can adjust as needed */
+	width: 890px; /* You can adjust as needed */
+	background-size: cover;
+	background-repeat: no-repeat;
+  }
+  .carousel-image2 {
+	background-image: url('./carousel2.jpg');
+	height: 400px; /* You can adjust as needed */
+	width: 890px; /* You can adjust as needed */
+	background-size: cover;
+	background-repeat: no-repeat;
+  }
+  .carousel-image3 {
+	background-image: url('./carousel3.jpg');
+	height: 400px; /* You can adjust as needed */
+	width: 900px; /* You can adjust as needed */
+	background-size: cover;
+	background-repeat: no-repeat;
+  }
+  .carousel-item-custom {
+	
+	overflow: hidden;
+	border-radius: 50px; /* adjust as needed */
+  }
+  .qnacard{
+	border-radius: 50px;
+	
+  }
+  .card-react{
+	background-size: 200% auto;
+  transition: 0.5s ease-in-out;
+  background-image: linear-gradient(45deg, #ffffff, #167c4d);
+  
+
+}
+.card-react:hover {
+	background-position: right center;
+	transform: translateY(-5px);
+	animation: gradient 5s ease infinite;
+	border-radius: 15px;
+  }
+
+@keyframes gradient {
+	0% {
+	  background-position: 0% 50%;
+	}
+	50% {
+	  background-position: 100% 50%;
+	}
+	100% {
+	  background-position: 0% 50%;
+	}
+  }

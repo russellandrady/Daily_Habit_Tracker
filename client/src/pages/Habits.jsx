@@ -33,7 +33,9 @@ export default function Habits() {
   const [formdata, setFormdata] = useState({});
   // const [error, setError] = useState(false);
   // const [loading, setLoading] = useState(false);
-  const { error, loading, habits, currentUser} = useSelector((state) => state.user);
+  const { error, loading, habits, currentUser } = useSelector(
+    (state) => state.user
+  );
   const dispatch = useDispatch();
 
   const [show, setShow] = useState(false);
@@ -188,25 +190,26 @@ export default function Habits() {
   };
 
   const fetchData = async () => {
-  try {
-
-    const response = await fetch("/api/habit/all");
-
-    if (response.ok) {
-      const data = await response.json();
-      dispatch(habitGotAll(data));
-    } else {
-      dispatch(habitGotAllFailure("Failed to fetch data"));
+    try {
+      const response = await fetch("/api/habit/all");
+      console.log("Response status:", response.status);
+      const text = await response.text();
+      console.log("Response text:", text);
+      if (response.ok) {
+        const data = await response.json();
+        dispatch(habitGotAll(data));
+      } else {
+        dispatch(habitGotAllFailure("Failed to fetch data"));
+      }
+    } catch (error) {
+      dispatch(habitGotAllFailure(error));
+      console.log(error);
     }
-  } catch (error) {
-    dispatch(habitGotAllFailure(error));
-    console.log(error);
-  }
-};
+  };
 
   useEffect(() => {
-    if(habits.length === 0){
-    fetchData();
+    if (habits.length === 0) {
+      fetchData();
     }
   }, []);
 

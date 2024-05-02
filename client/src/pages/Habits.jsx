@@ -188,17 +188,18 @@ export default function Habits() {
   };
 
   const fetchData = async () => {
-    try {
-      const response = await fetch("/api/habit/all");
-      if (!response.ok) {
-        dispatch(habitGotAllFailure("Failed to fetch data"));
-      }
+  try {
+    const response = await fetch("/api/habit/all");
+    if (response.ok) {
       const data = await response.json();
       dispatch(habitGotAll(data));
-    } catch (error) {
-      dispatch(habitGotAllFailure(error+"asdg"));
+    } else {
+      dispatch(habitGotAllFailure("Failed to fetch data"));
     }
-  };
+  } catch (error) {
+    dispatch(habitGotAllFailure(error));
+  }
+};
 
   useEffect(() => {
     if(habits.length === 0){

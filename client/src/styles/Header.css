@@ -166,6 +166,8 @@ header .search
 		left: 100%;
 		transition: left 0.3s ease, visibility 0.3s ease 0.3s, opacity 0.3s ease;
 		z-index: 5;
+		left: 0;
+		display: flex;
 	}
 	
 	header.open .navigation {

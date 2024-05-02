@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "../styles/Footer.css";
 function Header() {
   return (
+    <div >
     <footer>
       <div className="waves">
         <div className="wave" id="wave1"></div>
@@ -45,6 +46,7 @@ function Header() {
         </div>
       </div>
     </footer>
+    </div>
   );
 }
 

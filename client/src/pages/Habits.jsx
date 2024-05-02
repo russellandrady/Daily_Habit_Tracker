@@ -200,6 +200,7 @@ export default function Habits() {
     }
   } catch (error) {
     dispatch(habitGotAllFailure(error));
+    console.log(error);
   }
 };
 

@@ -15,7 +15,8 @@ export const createHabit = async (req, res, next) => {
 
 export const getAllHabits = async (req, res, next) => {
     try{
-        const habits = await Habit.find({ user: req.params.id });
+        const habits = await Habit.find({ user: req.user.id });
+        console.log(habits);
         res.status(203).json(habits);
 
     }

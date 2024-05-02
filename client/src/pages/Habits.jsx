@@ -192,9 +192,9 @@ export default function Habits() {
   const fetchData = async () => {
     try {
       const response = await fetch("/api/habit/all");
-      console.log("Response status:", response.status);
-      const text = await response.text();
-      console.log("Response text:", text);
+      console.log("Response status:", response);
+      // const text = await response.text();
+      // console.log("Response text:", text);
       if (response.ok) {
         const data = await response.json();
         dispatch(habitGotAll(data));

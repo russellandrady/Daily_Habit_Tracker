@@ -189,11 +189,9 @@ export default function Habits() {
 
   const fetchData = async () => {
   try {
-<<<<<<< HEAD
+
     const response = await fetch("/api/habit/all");
-=======
-    const response = await fetch(`/api/habit/all/${currentUser._id}`);
->>>>>>> 0c4b7dbd66d3b63f2febb5e4f8706f7ffcd173aa
+
     if (response.ok) {
       const data = await response.json();
       dispatch(habitGotAll(data));
